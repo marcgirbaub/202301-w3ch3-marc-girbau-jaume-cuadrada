@@ -1,8 +1,8 @@
-import { Component } from "../../Component/Component";
+import { Component } from "../Component/Component";
 
 export class StarRatingComponent extends Component {
   constructor(parentElement: Element) {
-    super("button", parentElement);
+    super("ul", parentElement, "score");
   }
 
   render() {

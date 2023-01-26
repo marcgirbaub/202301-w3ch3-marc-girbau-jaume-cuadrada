@@ -1,12 +1,14 @@
 import { type SeriesStructure } from "../../types/types";
+import { ButtonComponent } from "../ButtonComponent/ButtonComponent";
 import { Component } from "../Component/Component";
+import { StarRatingComponent } from "../StarRatingComponent/StarRatingComponent";
 import { type CardComponentStructure } from "./types";
 
 export class CardComponent extends Component implements CardComponentStructure {
   series: SeriesStructure;
 
   constructor(parentElement: Element, series: SeriesStructure) {
-    super("li", parentElement, "serie");
+    super("div", parentElement, "serie");
 
     this.series = series;
   }
@@ -21,5 +23,11 @@ export class CardComponent extends Component implements CardComponentStructure {
     <h4 class="serie__title">${this.series.name}</h4>
     <span class="serie__info">${this.series.creator} (${this.series.year})</span>
     `;
+
+    const ratingStars = new StarRatingComponent(this.element);
+    ratingStars.render();
+
+    const deleteButton = new ButtonComponent(this.element);
+    deleteButton.render();
   }
 }
