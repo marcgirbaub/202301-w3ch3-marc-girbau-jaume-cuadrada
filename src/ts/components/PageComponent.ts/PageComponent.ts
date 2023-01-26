@@ -5,8 +5,9 @@ export class PageComponent extends Component {
     super("div", document.body, "container");
   }
 
-  render() {
+  public render() {
     super.render();
+
     this.element.innerHTML = `
     <header class="main-header">
       <h1 class="main-title">My Series</h1>
@@ -16,5 +17,7 @@ export class PageComponent extends Component {
       <section class="list">
       <section class="list">
     </main>`;
+
+    this.element.querySelector(".list");
   }
 }
