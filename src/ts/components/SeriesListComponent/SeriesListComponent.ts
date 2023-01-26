@@ -35,7 +35,7 @@ export class SeriesListComponent
       .forEach((seriesCardContainer, position) => {
         const seriesCardComponent = new CardComponent(
           seriesCardContainer,
-          this.series[position]
+          this.getListOfSeries()![position]
         );
         seriesCardComponent.render();
       });

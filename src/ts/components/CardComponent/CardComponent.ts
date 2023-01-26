@@ -16,7 +16,7 @@ export class CardComponent extends Component implements CardComponentStructure {
 
     this.element.innerHTML = `
     <img class="serie__poster"
-      src=${this.series.poster}}
+      src=${this.series.poster}
       alt="${this.series.name} poster" />
     <h4 class="serie__title">${this.series.name}</h4>
     <span class="serie__info">${this.series.creator} (${this.series.year})</span>
