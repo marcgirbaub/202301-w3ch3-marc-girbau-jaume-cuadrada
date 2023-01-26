@@ -51,12 +51,20 @@ export class SeriesListComponent
 
   getListInfo(): string {
     if (this.title === pendingSeriesTitles) {
+      if (this.getPendingSeries().length === 0) {
+        return `Congrats! You've watched all your series`;
+      }
+
       return `You have ${
         this.getPendingSeries().length
       } series pending to watch`;
     }
 
     if (this.title === watchedSeriesTitle) {
+      if (this.getWatchedSeries().length === 0) {
+        return `You have not watched any serie yet`;
+      }
+
       return `You have watched ${this.getWatchedSeries().length} series`;
     }
 
