@@ -24,6 +24,7 @@ export class SeriesListComponent
     this.element.innerHTML = `
     <h3 class="list__title">${this.title}</h3>
     <span class="list__info">${this.getListInfo()}</span>
+    <ul class="series"></ul>
     `;
   }
 
