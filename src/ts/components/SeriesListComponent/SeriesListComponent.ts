@@ -1,9 +1,10 @@
+import { pendingSeriesTitles, watchedSeriesTitle } from "../..";
 import series from "../../series";
 import { type SeriesStructure, type Series } from "../../types/types";
 import { Component } from "../Component/Component";
 import { type SeriesListComponentStructure } from "./types";
 
-export class SeriesSectionComponent
+export class SeriesListComponent
   extends Component
   implements SeriesListComponentStructure
 {
@@ -22,7 +23,27 @@ export class SeriesSectionComponent
 
     this.element.innerHTML = `
     <h3 class="list__title">${this.title}</h3>
-    <span class="list__info">You have 4 series pending to watch</span>
+    <span class="list__info">${this.getListInfo()}</span>
     `;
+  }
+
+  getNumberOfWatchedSeries(): string {
+    return `${this.series.filter((serie) => serie.isWatched).length}`;
+  }
+
+  getNumberOfPendingSeries(): string {
+    return `${this.series.filter((serie) => !serie.isWatched).length}`;
+  }
+
+  getListInfo(): string {
+    if (this.title === pendingSeriesTitles) {
+      return `You have ${this.getNumberOfPendingSeries()} series pending to watch`;
+    }
+
+    if (this.title === watchedSeriesTitle) {
+      return `You have watched ${this.getNumberOfWatchedSeries()} series`;
+    }
+
+    return "";
   }
 }
