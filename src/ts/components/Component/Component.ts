@@ -4,9 +4,12 @@ export class Component implements ComponentStructre {
   element: Element;
   private readonly parentElement: Element;
 
-  constructor(tagName: string, parentElement: Element, className: string) {
+  constructor(tagName: string, parentElement: Element, className?: string) {
     this.element = document.createElement(tagName);
-    this.element.className = className;
+    if (className !== undefined) {
+      this.element.className = className;
+    }
+
     this.parentElement = parentElement;
   }
 
