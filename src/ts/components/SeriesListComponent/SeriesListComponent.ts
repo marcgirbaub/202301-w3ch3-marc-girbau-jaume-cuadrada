@@ -1,6 +1,7 @@
 import { pendingSeriesTitles, watchedSeriesTitle } from "../..";
 import series from "../../series";
 import { type SeriesStructure, type Series } from "../../types/types";
+import { CardComponent } from "../CardComponent/CardComponent";
 import { Component } from "../Component/Component";
 import { type SeriesListComponentStructure } from "./types";
 
@@ -24,27 +25,51 @@ export class SeriesListComponent
     this.element.innerHTML = `
     <h3 class="list__title">${this.title}</h3>
     <span class="list__info">${this.getListInfo()}</span>
-    <ul class="series"></ul>
+    <ul class="series">${this.getListOfSeries()!
+      .map(() => `<li class="serie"></li>`)
+      .join("")}</ul>
     `;
+
+    this.element
+      .querySelectorAll(".serie")
+      .forEach((seriesCardContainer, position) => {
+        const seriesCardComponent = new CardComponent(
+          seriesCardContainer,
+          this.series[position]
+        );
+        seriesCardComponent.render();
+      });
   }
 
-  getNumberOfWatchedSeries(): string {
-    return `${this.series.filter((serie) => serie.isWatched).length}`;
+  getWatchedSeries(): SeriesStructure[] {
+    return this.series.filter((serie) => serie.isWatched);
   }
 
-  getNumberOfPendingSeries(): string {
-    return `${this.series.filter((serie) => !serie.isWatched).length}`;
+  getPendingSeries(): SeriesStructure[] {
+    return this.series.filter((serie) => !serie.isWatched);
   }
 
   getListInfo(): string {
     if (this.title === pendingSeriesTitles) {
-      return `You have ${this.getNumberOfPendingSeries()} series pending to watch`;
+      return `You have ${
+        this.getPendingSeries().length
+      } series pending to watch`;
     }
 
     if (this.title === watchedSeriesTitle) {
-      return `You have watched ${this.getNumberOfWatchedSeries()} series`;
+      return `You have watched ${this.getWatchedSeries().length} series`;
     }
 
     return "";
+  }
+
+  getListOfSeries() {
+    if (this.title === pendingSeriesTitles) {
+      return this.getPendingSeries();
+    }
+
+    if (this.title === watchedSeriesTitle) {
+      return this.getWatchedSeries();
+    }
   }
 }
