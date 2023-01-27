@@ -34,6 +34,14 @@ export class CardComponent extends Component implements CardComponentStructure {
     );
     ratingStars.render();
 
+    const ratingStarsEl = ratingStars.element.querySelectorAll(".icon--score");
+
+    ratingStarsEl.forEach((star, position) => {
+      star.addEventListener("click", () => {
+        star.className = "icon-score fas fa-star";
+      });
+    });
+
     const deleteButton = new ButtonComponent(this.element);
     deleteButton.render();
 
